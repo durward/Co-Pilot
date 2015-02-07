@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsMessage;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 public class MainActivity extends ActionBarActivity {
 
     SMSListener smsListener;
+    Pilot mPilot = new MainPilot(this);
 
     public void TestDebugTEST(String debug){
         System.out.println(debug);
@@ -30,6 +32,9 @@ public class MainActivity extends ActionBarActivity {
         intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
         smsListener = new SMSListener(this);
         this.registerReceiver(smsListener, intentFilter);
+        MainPilot mPilotCast = (MainPilot)mPilot;
+        mPilotCast.SetSecondParty("+4433");
+        mPilotCast.SetCopilot("+3344");
     }
 
 
@@ -53,6 +58,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onRecieveSMS(SmsMessage msg) {
+        mPilot.OnRecv(msg.getOriginatingAddress(), msg.getMessageBody());
     }
 
     //If since is null, then all messages are returned

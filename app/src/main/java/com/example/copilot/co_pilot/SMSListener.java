@@ -35,6 +35,7 @@ public class SMSListener extends BroadcastReceiver
             recievedMsgs = new SmsMessage[pdus.length];
             for (int i=0; i < pdus.length; i++) {
                 recievedMsgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                activity.onRecieveSMS(recievedMsgs[i]);
                 str += "SMS from " + recievedMsgs[i].getOriginatingAddress() + " :" + recievedMsgs[i].getMessageBody();
             }
         }
