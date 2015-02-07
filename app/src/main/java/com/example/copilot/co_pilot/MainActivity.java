@@ -10,7 +10,7 @@ import android.widget.EditText;
 /**
  * Created by durwardbenham3 and jacquelineali on 2/7/15.
  */
-public class PilotActivity extends Activity{
+public class MainActivity extends Activity{
     // For sending to co-pilots
     Button grpSendBtn;
     EditText grpMsg;
