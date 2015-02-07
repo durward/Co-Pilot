@@ -13,8 +13,29 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity {
+/**
+ * Created by durwardbenham3 and jacquelineali on 2/7/15.
+ */
+public class MainActivity extends Activity{
+    // For sending to co-pilots
+    Button grpSendBtn;
+    EditText grpMsg;
+    EditText grpNums;
+    TextView grpDisplay;
+
+    // For sending to innocent bystander
+    Button passengerSendBtn;
+    EditText passengerMsg;
+    EditText passengerNum;
+    TextView passengerDisplay;
 
     SMSListener smsListener;
     Pilot mPilot = new CoPilot(this);
@@ -26,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.pilot);
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
@@ -34,29 +55,34 @@ public class MainActivity extends ActionBarActivity {
         this.registerReceiver(smsListener, intentFilter);
         CoPilot mPilotCast = (CoPilot)mPilot;
         mPilotCast.SetMainPilot("+4433");
+
+        grpSendBtn = (Button) findViewById(R.id.sendButtonTop);
+        grpMsg = (EditText) findViewById(R.id.messageTop);
+        grpNums = (EditText) findViewById(R.id.numberTop);
+
+        passengerSendBtn = (Button) findViewById(R.id.sendButtonBottom);
+        passengerMsg = (EditText) findViewById(R.id.messageBottom);
+        passengerNum = (EditText) findViewById(R.id.numberBottom);
+
+
+        // When clicked do this:
+        passengerSendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String myMsg = passengerMsg.getText().toString();
+                String phoneNumber = passengerNum.getText().toString();
+
+                // Calls method that sends messages
+                sendMsg(phoneNumber, myMsg);
+            }
+        });
+
+
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void sendMsg(String phoneNumber, String myMsg) {
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, myMsg, null, null);
     }
 
     public void onRecieveSMS(SmsMessage msg) {
