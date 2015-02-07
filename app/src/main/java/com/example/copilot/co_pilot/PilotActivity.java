@@ -10,7 +10,7 @@ import android.widget.EditText;
  * Created by durwardbenham3 and jacquelineali on 2/7/15.
  */
 public class PilotActivity extends Activity{
-    Button send;
+    Button sendBtn;
     EditText message;
     EditText number;
 
@@ -19,10 +19,10 @@ public class PilotActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot);
 
-        send = (Button) findViewById(R.id.send);
+        sendBtn = (Button) findViewById(R.id.sendButton);
         message = (EditText) findViewById(R.id.message);
         number = (EditText) findViewById(R.id.number);
-        send.setOnClickListener(new View.OnClickListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // ADD 2:28
