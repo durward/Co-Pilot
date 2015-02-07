@@ -62,7 +62,9 @@ public class MainActivity extends ActionBarActivity {
                 Long dateLong = c.getLong(c.getColumnIndex("date"));
                 Date time = new Date(dateLong);
 
-                messages.add(new SMSMessageDetails(addr, time, bod));
+                if(addr.equals(number) && (since == null || since.compareTo(time) <= 0)) {
+                    messages.add(new SMSMessageDetails(addr, time, bod));
+                }
                 c.moveToNext();
             }
 
