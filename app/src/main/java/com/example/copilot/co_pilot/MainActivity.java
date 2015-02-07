@@ -17,7 +17,7 @@ import java.util.Date;
 public class MainActivity extends ActionBarActivity {
 
     SMSListener smsListener;
-    Pilot mPilot = new MainPilot(this);
+    Pilot mPilot = new CoPilot(this);
 
     public void TestDebugTEST(String debug){
         System.out.println(debug);
@@ -32,9 +32,8 @@ public class MainActivity extends ActionBarActivity {
         intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
         smsListener = new SMSListener(this);
         this.registerReceiver(smsListener, intentFilter);
-        MainPilot mPilotCast = (MainPilot)mPilot;
-        mPilotCast.SetSecondParty("+4433");
-        mPilotCast.SetCopilot("+3344");
+        CoPilot mPilotCast = (CoPilot)mPilot;
+        mPilotCast.SetMainPilot("+4433");
     }
 
 
@@ -105,6 +104,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public void onDestroy(){
+        super.onDestroy();
         this.unregisterReceiver(smsListener);
     }
 }

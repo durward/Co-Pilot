@@ -32,13 +32,13 @@ public class CoPilot extends Pilot{
                 String   toCode = contents.substring(4,6); //TODO: Watch these numbers?
 
                 if(fromCode.equals("MP") && toCode.equals("SP")){
-                    System.out.println("MP->SP" + contents);
+                    System.out.println("MP to SP: " + contents);
                 }
                 else if(fromCode.equals("SP") && toCode.equals("MP")){
-                    System.out.println("SP->MP" + contents);
+                    System.out.println("SP to MP: " + contents);
                 }
                 else if(fromCode.equals("MP") && toCode.equals("CP")){
-                    System.out.println("MP->SP" + contents);
+                    System.out.println("MP to CP: " + contents);
                 }
             }
         }
