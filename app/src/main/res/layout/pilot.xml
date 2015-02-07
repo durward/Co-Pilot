@@ -32,7 +32,17 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/messageTop" />
-        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/conversationTop"
+            android:layout_below="@+id/numberTop"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/messageTop"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
     <RelativeLayout android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="fill_parent">
         <EditText
             android:layout_width="match_parent"
@@ -61,5 +71,15 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/messageBottom" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/conversationBottom"
+            android:layout_below="@+id/numberBottom"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/sendButtonBottom"
+            android:layout_alignEnd="@+id/sendButtonBottom" />
     </RelativeLayout>
 </LinearLayout>
