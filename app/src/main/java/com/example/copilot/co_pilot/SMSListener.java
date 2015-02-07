@@ -13,10 +13,19 @@ import android.widget.Toast;
 
 public class SMSListener extends BroadcastReceiver
 {
+    MainActivity activity;
+
+    SMSListener(MainActivity mainAc){
+        super();
+
+        activity = mainAc;
+    }
+
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        System.out.print("On Receive!");
+        System.out.println("On Receive!");
+        activity.TestDebugTEST("Yo, is it working yet?");
 
         Bundle bundle = intent.getExtras();
         SmsMessage[] recievedMsgs = null;
@@ -26,7 +35,7 @@ public class SMSListener extends BroadcastReceiver
             recievedMsgs = new SmsMessage[pdus.length];
             for (int i=0; i < pdus.length; i++) {
                 recievedMsgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                str += "SMS from " + recievedMsgs[i].getOriginatingAddress() + " :" + recievedMsgs[i].getMessageBody().toString();
+                str += "SMS from " + recievedMsgs[i].getOriginatingAddress() + " :" + recievedMsgs[i].getMessageBody();
             }
         }
 
