@@ -6,6 +6,7 @@ import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by durwardbenham3 and jacquelineali on 2/7/15.
@@ -15,11 +16,13 @@ public class MainActivity extends Activity{
     Button grpSendBtn;
     EditText grpMsg;
     EditText grpNums;
+    TextView grpDisplay;
 
     // For sending to innocent bystander
     Button passengerSendBtn;
     EditText passengerMsg;
     EditText passengerNum;
+    TextView passengerDisplay;
 
 
 
