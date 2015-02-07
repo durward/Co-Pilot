@@ -14,7 +14,6 @@ public class MainPilot {
 
     MainActivity activity;
 
-    //Some kind of reference to chatboxes
 
     MainPilot(){
         manager = SmsManager.getDefault();
@@ -29,16 +28,20 @@ public class MainPilot {
         coPilot = newNumber;
     }
 
+    public void SetSecondParty(String newNumber){
+        secondParty = newNumber;
+    }
+
     public void OnRecv(String from, String contents){
         if(secondParty.equals(from)){
-            //Display in the main chat
             SendToCopilot("SP->MP|" + contents);
+            System.out.println("SP->MP|" + contents);
         }
         else if(coPilot.equals(from)){
-            //Display in group chat
+            System.out.println(contents);
         }
         else{
-            //Who dis is?
+            System.out.println("Who dis is?");
         }
     }
 
@@ -49,6 +52,7 @@ public class MainPilot {
     public void SendToSecondParty(String contents){
         SendToNumber(secondParty, contents);
         SendToCopilot("MP->SP|" + contents);
+        System.out.println("Sent to SP and MP" + contents);
     }
 
     private void SendToNumber(String number, String content){

@@ -73,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
             messages.toArray(messagesArr);
             return messagesArr;
         }
+
         else{
             if(!c.isClosed()) {
                 c.close();
