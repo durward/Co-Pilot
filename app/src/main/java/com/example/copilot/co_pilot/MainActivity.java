@@ -1,9 +1,15 @@
 package com.example.copilot.co_pilot;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,5 +41,41 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //If since is null, then all messages are returned
+    public SMSMessageDetails[] GetMessages(String number, Date since){
+        Uri sentURI = Uri.parse("content://sms/inbox");
+        String[] reqCols = new String[] { "_id", "address", "body", "date"};
+        ContentResolver cr = getContentResolver();
+        Cursor c = cr.query(sentURI, reqCols, null, null, null);
+
+        if(c!=null && c.getCount()>0){
+            c.moveToFirst();
+
+            //SMSMessageDetails[] messages = new SMSMessageDetails[c.getCount()];
+            ArrayList<SMSMessageDetails> messages = new ArrayList<SMSMessageDetails>();
+
+            for(int i = 0; i < c.getCount(); i++) {
+                String addr = c.getString(c.getColumnIndex("address"));
+                String bod = c.getString(c.getColumnIndex("body"));
+                Long dateLong = c.getLong(c.getColumnIndex("date"));
+                Date time = new Date(dateLong);
+
+                messages.add(new SMSMessageDetails(addr, time, bod));
+                c.moveToNext();
+            }
+
+            c.close();
+            SMSMessageDetails[] messagesArr = new SMSMessageDetails[messages.size()];
+            messages.toArray(messagesArr);
+            return messagesArr;
+        }
+        else{
+            if(!c.isClosed()) {
+                c.close();
+            }
+            return new SMSMessageDetails[0];
+        }
     }
 }
