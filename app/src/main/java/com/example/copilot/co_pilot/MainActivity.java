@@ -1,6 +1,7 @@
 package com.example.copilot.co_pilot;
 
 import android.content.ContentResolver;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -14,10 +15,21 @@ import java.util.Date;
 
 public class MainActivity extends ActionBarActivity {
 
+    SMSListener smsListener;
+
+    public void TestDebugTEST(String debug){
+        System.out.println(debug);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
+        smsListener = new SMSListener(this);
+        this.registerReceiver(smsListener, intentFilter);
     }
 
 
@@ -80,5 +92,10 @@ public class MainActivity extends ActionBarActivity {
             }
             return new SMSMessageDetails[0];
         }
+    }
+
+    @Override
+    public void onDestroy(){
+        this.unregisterReceiver(smsListener);
     }
 }
