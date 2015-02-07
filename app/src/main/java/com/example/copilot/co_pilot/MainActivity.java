@@ -1,6 +1,10 @@
 package com.example.copilot.co_pilot;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -18,11 +22,22 @@ public class MainActivity extends Activity{
     EditText grpNums;
     TextView grpDisplay;
 
+    IntentFilter intentFilter;
+
     // For sending to innocent bystander
     Button passengerSendBtn;
     EditText passengerMsg;
     EditText passengerNum;
     TextView passengerDisplay;
+
+    private BroadcastReceiver intentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Show message in textview - may need to name these something
+            TextView passengerDisplay = (TextView) findViewById(R.id.conversationBottom);
+            passengerDisplay.setText(intent.getExtras().getString("sms"));
+        }
+    };
 
 
 

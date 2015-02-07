@@ -27,8 +27,14 @@ public class SMSReceiver extends BroadcastReceiver {
                 str += messages[i].getMessageBody().toString();
                 str += "\n";
             }
-            // display the message
+            // display the message in toast
             Toast.makeText(context, str, Toast.LENGTH_SHORT).show();
+
+            // display in TextView
+            Intent broadcastIntent = new Intent();
+            broadcastIntent.setAction("SMS_RECEIVED_ACTION");
+            broadcastIntent.putExtra("sms", str);
+            context.sendBroadcast(broadcastIntent);
         }
     }
 }
