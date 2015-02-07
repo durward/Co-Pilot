@@ -5,22 +5,20 @@ import android.telephony.SmsManager;
 /**
  * Created by Benji Snith on 2/7/2015.
  */
-public class MainPilot {
+
+public class MainPilot extends Pilot{
 
     String secondParty = "";
     String coPilot = "";
 
-    SmsManager manager;
-
-    MainActivity activity;
-
+ MainActivity activity;
 
     MainPilot(){
-        manager = SmsManager.getDefault();
+        super.manager = SmsManager.getDefault();
     }
 
     MainPilot(MainActivity mainAc){
-        manager = SmsManager.getDefault();
+        super.manager = SmsManager.getDefault();
         activity = mainAc;
     }
 
@@ -54,10 +52,4 @@ public class MainPilot {
         SendToCopilot("MP->SP|" + contents);
         System.out.println("Sent to SP and MP" + contents);
     }
-
-    private void SendToNumber(String number, String content){
-        manager.sendTextMessage(number, null, content, null, null);
-    }
-
-
 }

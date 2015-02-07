@@ -2,20 +2,16 @@ package com.example.copilot.co_pilot;
 
 import android.telephony.SmsManager;
 
-public class CoPilot {
+public class CoPilot extends Pilot{
     String mainPilot = "";
 
-    SmsManager manager;
     MainActivity activity;
 
-    //Some kind of reference to chatboxes
-
     CoPilot(){
-        manager = SmsManager.getDefault();
-    }
+        super.manager = SmsManager.getDefault();}
 
     CoPilot(MainActivity mainAc){
-        manager = SmsManager.getDefault();
+        super.manager = SmsManager.getDefault();
         activity = mainAc;
     }
 
@@ -35,13 +31,13 @@ public class CoPilot {
                 String fromCode = contents.substring(0,2);
                 String   toCode = contents.substring(4,6); //TODO: Watch these numbers?
 
-                if(fromCode == "MP" && toCode == "SP"){
+                if(fromCode.equals("MP") && toCode.equals("SP")){
                     System.out.println("MP->SP" + contents);
                 }
-                else if(fromCode == "SP" && toCode == "MP"){
+                else if(fromCode.equals("SP") && toCode.equals("MP")){
                     System.out.println("SP->MP" + contents);
                 }
-                else if(fromCode == "MP" && toCode == "CP"){
+                else if(fromCode.equals("MP") && toCode.equals("CP")){
                     System.out.println("MP->SP" + contents);
                 }
             }
@@ -54,10 +50,4 @@ public class CoPilot {
     public void SendToMainPilot(String contents){
         SendToNumber(mainPilot, contents);
     }
-
-    private void SendToNumber(String number, String content){
-        manager.sendTextMessage(number, null, content, null, null);
-    }
-
-
 }
