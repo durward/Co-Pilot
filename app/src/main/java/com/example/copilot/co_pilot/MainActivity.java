@@ -34,8 +34,8 @@ public class MainActivity extends Activity{
         @Override
         public void onReceive(Context context, Intent intent) {
             // Show message in textview - may need to name these something
-            TextView passengerDisplay = (TextView) findViewById(R.id.conversationBottom);
-            passengerDisplay.setText(intent.getExtras().getString("sms"));
+            TextView grpDisplay = (TextView) findViewById(R.id.conversationBottom);
+            grpDisplay.setText(intent.getExtras().getString("sms"));
         }
     };
 
@@ -45,6 +45,10 @@ public class MainActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot);
+
+        // intent to filter received sms messages
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("SMS_RECEIVED_ACTION");
 
         grpSendBtn = (Button) findViewById(R.id.sendButtonTop);
         grpMsg = (EditText) findViewById(R.id.messageTop);
@@ -68,6 +72,18 @@ public class MainActivity extends Activity{
         });
 
 
+    }
+
+    protected void onResume() {
+        // register the receiver
+        registerReceiver(intentReceiver,intentFilter);
+        super.onResume();
+    }
+
+    protected void onPause() {
+        // unregister the receiver
+        unregisterReceiver(intentReceiver);
+        super.onPause();
     }
 
     private void sendMsg(String phoneNumber, String myMsg) {
