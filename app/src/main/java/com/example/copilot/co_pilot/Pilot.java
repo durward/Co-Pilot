@@ -10,6 +10,7 @@ public abstract class Pilot {
     SmsManager manager;
 
     public void SendToNumber(String number, String content){
+        System.out.println("Number: " + number);
         manager.sendTextMessage(number, null, content, null, null);
     }
 

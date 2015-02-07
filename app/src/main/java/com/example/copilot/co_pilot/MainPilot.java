@@ -34,17 +34,20 @@ public class MainPilot extends Pilot{
         if(secondParty.equals(from)){
             SendToCopilot("SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
+            activity.displayPassengerConversation(contents);
         }
         else if(coPilot.equals(from)){
             System.out.println(contents);
+            activity.displayGrpConversation(contents);
         }
         else{
-            System.out.println("Who dis is?");
+            System.out.println("Who dis is?" + coPilot + ": " + from);
         }
     }
 
     public void SendToCopilot(String contents){
         SendToNumber(coPilot, "MP->CP|" + contents);
+        activity.displayGrpConversation(contents);
     }
 
     public void SendToSecondParty(String contents){

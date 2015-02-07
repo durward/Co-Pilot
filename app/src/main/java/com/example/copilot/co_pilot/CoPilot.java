@@ -33,12 +33,15 @@ public class CoPilot extends Pilot{
 
                 if(fromCode.equals("MP") && toCode.equals("SP")){
                     System.out.println("MP to SP: " + contents);
+                    activity.displayPassengerConversation(contents);
                 }
                 else if(fromCode.equals("SP") && toCode.equals("MP")){
                     System.out.println("SP to MP: " + contents);
+                    activity.displayPassengerConversation(contents);
                 }
                 else if(fromCode.equals("MP") && toCode.equals("CP")){
                     System.out.println("MP to CP: " + contents);
+                    activity.displayGrpConversation(contents);
                 }
             }
         }
@@ -49,5 +52,6 @@ public class CoPilot extends Pilot{
 
     public void SendToMainPilot(String contents){
         SendToNumber(mainPilot, contents);
+        activity.displayGrpConversation(contents);
     }
 }

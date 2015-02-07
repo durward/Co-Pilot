@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -29,16 +33,18 @@ public class MainActivity extends Activity{
     Button grpSendBtn;
     EditText grpMsg;
     EditText grpNums;
-    TextView grpDisplay;
+
+    IntentFilter intentFilter;
 
     // For sending to innocent bystander
     Button passengerSendBtn;
     EditText passengerMsg;
     EditText passengerNum;
-    TextView passengerDisplay;
 
     SMSListener smsListener;
-    Pilot mPilot = new CoPilot(this);
+    Pilot mPilot = new MainPilot(this);
+
+    //private BroadcastReceiver intentReceiver = new SMSListener(this);
 
     public void TestDebugTEST(String debug){
         System.out.println(debug);
@@ -49,83 +55,74 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot);
 
-        IntentFilter intentFilter = new IntentFilter();
+        intentFilter = new IntentFilter();
         intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
         smsListener = new SMSListener(this);
         this.registerReceiver(smsListener, intentFilter);
-        CoPilot mPilotCast = (CoPilot)mPilot;
-        mPilotCast.SetMainPilot("+4433");
 
-        grpSendBtn = (Button) findViewById(R.id.sendButtonTop);
-        grpMsg = (EditText) findViewById(R.id.messageTop);
-        grpNums = (EditText) findViewById(R.id.numberTop);
+//        CoPilot mPilotCast = (CoPilot)mPilot;
+//        mPilotCast.SetMainPilot("+4433");
 
-        passengerSendBtn = (Button) findViewById(R.id.sendButtonBottom);
-        passengerMsg = (EditText) findViewById(R.id.messageBottom);
-        passengerNum = (EditText) findViewById(R.id.numberBottom);
+        grpSendBtn = (Button) findViewById(R.id.sendButtonBottom);
+        grpMsg = (EditText) findViewById(R.id.messageBottom);
+        grpNums = (EditText) findViewById(R.id.numberBottom);
+
+        passengerSendBtn = (Button) findViewById(R.id.sendButtonTop);
+        passengerMsg = (EditText) findViewById(R.id.messageTop);
+        passengerNum = (EditText) findViewById(R.id.numberTop);
 
 
-        // When clicked do this:
-        passengerSendBtn.setOnClickListener(new View.OnClickListener() {
+        // When clicked do this: (Bottom)
+        grpSendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String myMsg = passengerMsg.getText().toString();
-                String phoneNumber = passengerNum.getText().toString();
+                String myMsg = grpMsg.getText().toString();
+                String phoneNumber = grpNums.getText().toString();
 
                 // Calls method that sends messages
-                sendMsg(phoneNumber, myMsg);
+                sendGrpMsg(phoneNumber, myMsg);
             }
         });
-
-
     }
 
-    private void sendMsg(String phoneNumber, String myMsg) {
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNumber, null, myMsg, null, null);
+    protected void onResume() {
+        // register the receiver
+        registerReceiver(smsListener,intentFilter);
+        super.onResume();
     }
+
+    protected void onPause() {
+        // unregister the receiver
+        unregisterReceiver(smsListener);
+        super.onPause();
+    }
+
+    private void sendGrpMsg(String number, String message) {
+        MainPilot pilot = (MainPilot) mPilot;
+        pilot.SetCopilot("+1" + number);
+        pilot.SendToCopilot(message);
+    }
+
+//    private void sendMsg(String phoneNumber, String myMsg) {
+//        SmsManager sms = SmsManager.getDefault();
+//        sms.sendTextMessage(phoneNumber, null, myMsg, null, null);
+//    }
 
     public void onRecieveSMS(SmsMessage msg) {
+        System.out.println("MA: " + msg.getOriginatingAddress() + " " + msg.getMessageBody());
         mPilot.OnRecv(msg.getOriginatingAddress(), msg.getMessageBody());
     }
 
-    //If since is null, then all messages are returned
-    public SMSMessageDetails[] GetMessages(String number, Date since){
-        Uri sentURI = Uri.parse("content://sms/inbox");
-        String[] reqCols = new String[] { "_id", "address", "body", "date"};
-        ContentResolver cr = getContentResolver();
-        Cursor c = cr.query(sentURI, reqCols, null, null, null);
+    public void displayGrpConversation(String message) {
+        // Show message in textview - may need to name these something
+        TextView grpDisplay = (TextView) findViewById(R.id.conversationBottom);
+        grpDisplay.setText(message);
+    }
 
-        if(c!=null && c.getCount()>0){
-            c.moveToFirst();
-
-            //SMSMessageDetails[] messages = new SMSMessageDetails[c.getCount()];
-            ArrayList<SMSMessageDetails> messages = new ArrayList<SMSMessageDetails>();
-
-            for(int i = 0; i < c.getCount(); i++) {
-                String addr = c.getString(c.getColumnIndex("address"));
-                String bod = c.getString(c.getColumnIndex("body"));
-                Long dateLong = c.getLong(c.getColumnIndex("date"));
-                Date time = new Date(dateLong);
-
-                if(addr.equals(number) && (since == null || since.compareTo(time) <= 0)) {
-                    messages.add(new SMSMessageDetails(addr, time, bod));
-                }
-                c.moveToNext();
-            }
-
-            c.close();
-            SMSMessageDetails[] messagesArr = new SMSMessageDetails[messages.size()];
-            messages.toArray(messagesArr);
-            return messagesArr;
-        }
-
-        else{
-            if(!c.isClosed()) {
-                c.close();
-            }
-            return new SMSMessageDetails[0];
-        }
+    public void displayPassengerConversation(String message) {
+        // Show message in textview - may need to name these something
+        TextView passengerDisplay = (TextView) findViewById(R.id.conversationTop);
+        passengerDisplay.setText(message);
     }
 
     @Override
