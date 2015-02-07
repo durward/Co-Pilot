@@ -29,26 +29,25 @@ public class CoPilot {
             int arrow = contents.indexOf("->");
 
             if(pipe != 6 || arrow != 2 || contents.length() < 7){
-                //Something went wrong, abort abort
+                System.out.println("Whatchu tryin?");
             }
             else{
                 String fromCode = contents.substring(0,2);
                 String   toCode = contents.substring(4,6); //TODO: Watch these numbers?
 
                 if(fromCode == "MP" && toCode == "SP"){
-                    //Display in the main chat
-                    //activity.main
+                    System.out.println("MP->SP" + contents);
                 }
                 else if(fromCode == "SP" && toCode == "MP"){
-                    //Display in the main chat
+                    System.out.println("SP->MP" + contents);
                 }
                 else if(fromCode == "MP" && toCode == "CP"){
-                    //Display in the group chat
+                    System.out.println("MP->SP" + contents);
                 }
             }
         }
         else{
-            //Who dis is?
+            System.out.println("Who dis is?");
         }
     }
 
