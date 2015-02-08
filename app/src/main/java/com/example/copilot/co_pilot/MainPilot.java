@@ -10,6 +10,7 @@ public class MainPilot extends Pilot{
 
     String secondParty = "";
     String coPilot = "";
+    String potentialCoPilot = "";
 
  IActivity activity;
 
@@ -31,7 +32,18 @@ public class MainPilot extends Pilot{
     }
 
     public void OnRecv(String from, String contents){
-        if(secondParty.equals(from)){
+        if(coPilot.equals("")) {
+            if(from.equals(potentialCoPilot)) {
+                if(contents.substring(0,7).equals("CPRQYS|")) {
+                    coPilot = potentialCoPilot;
+                    potentialCoPilot = "";
+                }
+                else if(contents.substring(0,7).equals("CPRQNO|")) {
+                    potentialCoPilot = "";
+                }
+            }
+        }
+        else if(secondParty.equals(from)){
             SendToNumber(coPilot, "SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
             activity.displayPassengerConversation(contents);
@@ -43,6 +55,11 @@ public class MainPilot extends Pilot{
         else{
             System.out.println("Who dis is?" + coPilot + ": " + from);
         }
+    }
+
+    public void sendRequest(String number) {
+        potentialCoPilot = number;
+        SendToNumber(number, "MPRQST|");
     }
 
     public void SendToCopilot(String contents){

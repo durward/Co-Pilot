@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text="Send Request Text to Co-Pilot"
             android:id="@+id/conversationBottom"
             android:layout_below="@+id/numberBottom"
             android:layout_alignParentStart="true"

@@ -1,6 +1,8 @@
 package com.example.copilot.co_pilot;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
@@ -98,8 +100,13 @@ public class MainActivity extends Activity implements IActivity {
     }
 
     private void sendGrpMsg(String number, String message) {
-        mPilot.SetCopilot("+1" + number);
-        mPilot.SendToCopilot(message);
+        if (mPilot.coPilot.equals("")) {
+            mPilot.potentialCoPilot = number;
+            mPilot.sendRequest(number);
+        }
+        else {
+            mPilot.SendToCopilot(message);
+        }
     }
 
     private void sendPassengerMsg(String number, String message) {
@@ -131,7 +138,7 @@ public class MainActivity extends Activity implements IActivity {
 
     protected void onResume() {
         // register the receiver
-        registerReceiver(smsListener,intentFilter);
+        registerReceiver(smsListener, intentFilter);
         super.onResume();
     }
 
