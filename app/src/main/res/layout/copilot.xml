@@ -8,6 +8,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#65C2E0"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/numberTop"
@@ -19,6 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#65C2E0"
             android:text="New Text"
             android:id="@+id/conversationTop"
             android:layout_below="@+id/numberTop"
@@ -29,6 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#65C2E0"
             android:text="CO-PILOT VIEW"
             android:id="@+id/textView"
             android:layout_alignParentBottom="true"
@@ -38,6 +41,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#E08365"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/numberBottom"
@@ -50,6 +54,7 @@
             android:layout_width="275dp"
             android:layout_gravity ="bottom"
             android:layout_height="wrap_content"
+            android:backgroundTint="#E08365"
             android:id="@+id/messageBottom"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
@@ -66,6 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#E08365"
             android:text="New Text"
             android:id="@+id/conversationBottom"
             android:layout_below="@+id/numberBottom"
