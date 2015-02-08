@@ -57,6 +57,17 @@ public class MainActivity extends Activity implements IActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pilot);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String coPilot = extras.getString("com.copilot.copilot");
+            if(coPilot != null && !coPilot.equals("")) {
+                mPilot.SetCopilot(coPilot);
+            }
+            else{
+                System.out.println("Failed to read in copilot in MainActivity");
+            }
+        }
+
         intentFilter = new IntentFilter();
         intentFilter.addAction("android.provider.Telephony.SMS_RECEIVED");
         smsListener = new SMSListener(this);

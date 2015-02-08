@@ -13,8 +13,6 @@ public class StartUpActivity extends Activity {
     Button cpLaunchBtn;
     Button mpLaunchBtn;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +32,7 @@ public class StartUpActivity extends Activity {
         mpLaunchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(v.getContext(), MainActivity.class);
+                Intent myIntent = new Intent(v.getContext(), InviteActivity.class);
                 startActivity(myIntent);
             }
         });

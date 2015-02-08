@@ -23,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Invite screen-->
+        <activity
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:name=".InviteActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/app_name" >
+        </activity>
+
         <!-- MAIN PILOT -->
         <activity
             android:theme="@android:style/Theme.NoTitleBar"
