@@ -34,7 +34,6 @@ public class MainPilot extends Pilot{
         if(secondParty.equals(from)){
             SendToNumber(coPilot, "SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
-            activity.displayGrpConversation(contents);
             activity.displayPassengerConversation(contents);
         }
         else if(coPilot.equals(from)){
