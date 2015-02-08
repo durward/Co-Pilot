@@ -32,8 +32,9 @@ public class MainPilot extends Pilot{
 
     public void OnRecv(String from, String contents){
         if(secondParty.equals(from)){
-            SendToCopilot("SP->MP|" + contents);
+            SendToNumber(coPilot, "SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
+            activity.displayGrpConversation(contents);
             activity.displayPassengerConversation(contents);
         }
         else if(coPilot.equals(from)){
