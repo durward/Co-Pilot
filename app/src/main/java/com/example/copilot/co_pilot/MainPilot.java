@@ -54,6 +54,7 @@ public class MainPilot extends Pilot{
     public void SendToSecondParty(String contents){
         SendToNumber(secondParty, contents);
         SendToCopilot("MP->SP|" + contents);
+        activity.displayPassengerConversation(contents);
         System.out.println("Sent to SP and MP" + contents);
     }
 }
