@@ -32,8 +32,9 @@ public class MainPilot extends Pilot{
     }
 
     public void OnRecv(String from, String contents){
+        System.out.println("!!!!!" + potentialCoPilot + "  from: " + from);
         if(coPilot.equals("")) {
-            if(from.equals(potentialCoPilot)) {
+            if(from.equals("+1" + potentialCoPilot)) {
                 System.out.println("This is what you want " + contents.substring(0,7));
                 if(contents.substring(0,7).equals("CPRQYS|")) {
                     System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
