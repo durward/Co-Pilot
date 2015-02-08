@@ -5,12 +5,12 @@ import android.telephony.SmsManager;
 public class CoPilot extends Pilot{
     String mainPilot = "";
 
-    MainActivity activity;
+    IActivity activity;
 
     CoPilot(){
         super.manager = SmsManager.getDefault();}
 
-    CoPilot(MainActivity mainAc){
+    CoPilot(IActivity mainAc){
         super.manager = SmsManager.getDefault();
         activity = mainAc;
     }

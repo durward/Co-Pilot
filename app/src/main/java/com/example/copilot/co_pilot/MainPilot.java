@@ -11,13 +11,13 @@ public class MainPilot extends Pilot{
     String secondParty = "";
     String coPilot = "";
 
- MainActivity activity;
+ IActivity activity;
 
     MainPilot(){
         super.manager = SmsManager.getDefault();
     }
 
-    MainPilot(MainActivity mainAc){
+    MainPilot(IActivity mainAc){
         super.manager = SmsManager.getDefault();
         activity = mainAc;
     }
