@@ -113,7 +113,7 @@ public class MainActivity extends Activity implements IActivity {
     }
 
     private void sendPassengerMsg(String number, String message) {
-        mPilot.SetSecondParty("+1" + number);
+        mPilot.SetSecondParty(number);
         mPilot.SendToSecondParty(message);
     }
 

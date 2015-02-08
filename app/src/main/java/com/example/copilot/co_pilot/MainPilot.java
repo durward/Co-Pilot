@@ -34,11 +34,11 @@ public class MainPilot extends Pilot{
     public void OnRecv(String from, String contents){
         System.out.println("!!!!!" + potentialCoPilot + "  from: " + from);
         if(coPilot.equals("")) {
-            if(from.equals("+1" + potentialCoPilot)) {
+            if(from.equals(potentialCoPilot) || from.equals("+1" + potentialCoPilot)) {
                 System.out.println("This is what you want " + contents.substring(0,7));
                 if(contents.substring(0,7).equals("CPRQYS|")) {
                     System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
-                    coPilot = "+1" + potentialCoPilot;
+                    coPilot = potentialCoPilot;
                     potentialCoPilot = "";
                 }
                 else if(contents.substring(0,7).equals("CPRQNO|")) {
@@ -47,12 +47,12 @@ public class MainPilot extends Pilot{
                 }
             }
         }
-        else if(secondParty.equals(from)){
+        else if(from.equals("+1" + secondParty) || from.equals(secondParty)){
             SendToNumber(coPilot, "SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
             activity.displayPassengerConversation(contents);
         }
-        else if(coPilot.equals(from)){
+        else if(from.equals("+1" + coPilot) || from.equals(coPilot)){
             System.out.println(contents);
             activity.displayGrpConversation(contents);
         }
