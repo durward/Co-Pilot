@@ -83,18 +83,18 @@ public class MainActivity extends Activity{
                 grpMsg.setText("");
             }
         });
-    }
 
-    protected void onResume() {
-        // register the receiver
-        registerReceiver(smsListener,intentFilter);
-        super.onResume();
-    }
-
-    protected void onPause() {
-        // unregister the receiver
-        unregisterReceiver(smsListener);
-        super.onPause();
+        // When clicked do this: (Top)
+        passengerSendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String myMsg = passengerMsg.getText().toString();
+                String phoneNumber = passengerNum.getText().toString();
+                // Calls method that sends messages
+                sendPassengerMsg(phoneNumber, myMsg);
+                passengerMsg.setText("");
+            }
+        });
     }
 
     private void sendGrpMsg(String number, String message) {
@@ -103,7 +103,18 @@ public class MainActivity extends Activity{
         pilot.SendToCopilot(message);
     }
 
-    public void onRecieveSMS(SmsMessage msg) {
+    private void sendPassengerMsg(String number, String message) {
+        MainPilot pilot = (MainPilot) mPilot;
+        pilot.SendToSecondParty("+1" + number);
+        pilot.SendToSecondParty(message);
+    }
+
+//    private void sendMsg(String phoneNumber, String myMsg) {
+//        SmsManager sms = SmsManager.getDefault();
+//        sms.sendTextMessage(phoneNumber, null, myMsg, null, null);
+//    }
+
+    public void onReceiveSMS(SmsMessage msg) {
         System.out.println("MA: " + msg.getOriginatingAddress() + " " + msg.getMessageBody());
         mPilot.OnRecv(msg.getOriginatingAddress(), msg.getMessageBody());
     }
@@ -118,6 +129,18 @@ public class MainActivity extends Activity{
         // Show message in textview - may need to name these something
         TextView passengerDisplay = (TextView) findViewById(R.id.conversationTop);
         passengerDisplay.setText(message);
+    }
+
+    protected void onResume() {
+        // register the receiver
+        registerReceiver(smsListener,intentFilter);
+        super.onResume();
+    }
+
+    protected void onPause() {
+        // unregister the receiver
+        unregisterReceiver(smsListener);
+        super.onPause();
     }
 
     @Override
