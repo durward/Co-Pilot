@@ -7,8 +7,4 @@ import android.telephony.SmsMessage;
  */
 public interface IActivity {
     void onReceiveSMS(SmsMessage recievedMsg);
-
-    void displayPassengerConversation(String contents);
-
-    void displayGrpConversation(String contents);
 }

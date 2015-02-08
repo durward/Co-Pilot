@@ -12,13 +12,13 @@ public class MainPilot extends Pilot{
     String coPilot = "";
     String potentialCoPilot = "";
 
- IActivity activity;
+ MainActivity activity;
 
     MainPilot(){
         super.manager = SmsManager.getDefault();
     }
 
-    MainPilot(IActivity mainAc){
+    MainPilot(MainActivity mainAc){
         super.manager = SmsManager.getDefault();
         activity = mainAc;
     }
@@ -50,11 +50,11 @@ public class MainPilot extends Pilot{
         else if(from.equals("+1" + secondParty) || from.equals(secondParty)){
             SendToNumber(coPilot, "SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
-            activity.displayPassengerConversation(contents);
+            activity.displayPassengerLeftConversation(contents);
         }
         else if(from.equals("+1" + coPilot) || from.equals(coPilot)){
             System.out.println(contents);
-            activity.displayGrpConversation(contents);
+            activity.displayGrpLeftConversation(contents);
         }
         else{
             System.out.println("Who dis is?" + coPilot + ": " + from);
@@ -68,13 +68,13 @@ public class MainPilot extends Pilot{
 
     public void SendToCopilot(String contents){
         SendToNumber(coPilot, "MP->CP|" + contents);
-        activity.displayGrpConversation(contents);
+        activity.displayGrpRightConversation(contents);
     }
 
     public void SendToSecondParty(String contents){
         SendToNumber(secondParty, contents);
         SendToNumber(coPilot, "MP->SP|" + contents);
-        activity.displayPassengerConversation(contents);
+        activity.displayPassengerRightConversation(contents);
         System.out.println("Sent to SP and MP" + contents);
     }
 }

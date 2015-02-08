@@ -131,16 +131,30 @@ public class CoPilotActivity extends Activity implements IActivity {
         coPilot.OnRecv(msg.getOriginatingAddress(), msg.getMessageBody());
     }
 
-    public void displayGrpConversation(String message) {
+    public void displayGrpLeftConversation(String message) {
         // Show message in textview - may need to name these something
-        TextView grpDisplay = (TextView) findViewById(R.id.conversationBottom);
+        TextView grpDisplay = (TextView) findViewById(R.id.conversationBottomLeft);
         String prev = grpDisplay.getText().toString();
         grpDisplay.setText(prev + "\n" + message);
     }
 
-    public void displayPassengerConversation(String message) {
+    public void displayGrpRightConversation(String message) {
         // Show message in textview - may need to name these something
-        TextView passengerDisplay = (TextView) findViewById(R.id.conversationTop);
+        TextView grpDisplay = (TextView) findViewById(R.id.conversationBottomRight);
+        String prev = grpDisplay.getText().toString();
+        grpDisplay.setText(prev + "\n" + message);
+    }
+
+    public void displayPassengerLeftConversation(String message) {
+        // Show message in textview - may need to name these something
+        TextView passengerDisplay = (TextView) findViewById(R.id.conversationTopLeft);
+        String prev = passengerDisplay.getText().toString();
+        passengerDisplay.setText(prev + "\n" + message);
+    }
+
+    public void displayPassengerRightConversation(String message) {
+        // Show message in textview - may need to name these something
+        TextView passengerDisplay = (TextView) findViewById(R.id.conversationTopRight);
         String prev = passengerDisplay.getText().toString();
         passengerDisplay.setText(prev + "\n" + message);
     }
