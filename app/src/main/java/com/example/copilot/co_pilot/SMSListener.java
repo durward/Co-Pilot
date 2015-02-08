@@ -4,6 +4,7 @@ package com.example.copilot.co_pilot;
  * Created by Benji Snith on 2/7/2015.
  */
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +13,11 @@ import android.telephony.SmsMessage;
 
 public class SMSListener extends BroadcastReceiver
 {
-    MainActivity activity;
+    //MainActivity activity;
+    IActivity activity;
 
-    SMSListener(MainActivity mainAc){
+    //SMSListener(MainActivity mainAc){
+    SMSListener(IActivity mainAc){
         super();
 
         activity = mainAc;
@@ -24,7 +27,6 @@ public class SMSListener extends BroadcastReceiver
     public void onReceive(Context context, Intent intent)
     {
         System.out.println("On Receive!");
-        activity.TestDebugTEST("Yo, is it working yet?");
 
         Bundle bundle = intent.getExtras();
         SmsMessage[] recievedMsgs = null;
