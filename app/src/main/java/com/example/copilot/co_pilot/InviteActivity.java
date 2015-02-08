@@ -27,6 +27,7 @@ public class InviteActivity extends Activity implements IActivity {
     @Override
     public void onCreate(Bundle saved){
         super.onCreate(saved);
+        setContentView(R.layout.invite_screen);
 
         manager = SmsManager.getDefault();
 
@@ -41,6 +42,7 @@ public class InviteActivity extends Activity implements IActivity {
         inviteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                potentialCoPilot = inviteNumber.getText().toString();
                 SendToNumber(inviteNumber.getText().toString(), "MPRQST|");
                 Toast requestSent = Toast.makeText(v.getContext(), "Request Sent", Toast.LENGTH_SHORT);
                 requestSent.show();
@@ -63,32 +65,28 @@ public class InviteActivity extends Activity implements IActivity {
     public void onReceiveSMS(SmsMessage receivedMsg) {
         String from = receivedMsg.getOriginatingAddress();
         String contents = receivedMsg.getMessageBody();
-        if(coPilot.equals("")) {
-            if(from.equals(potentialCoPilot) || from.equals("+1" + potentialCoPilot)) {
-                System.out.println("This is what you want " + contents.substring(0,7));
-                if(contents.substring(0,7).equals("CPRQYS|")) {
+        System.out.println("OnREcv invite: " + from + "  "+ potentialCoPilot);
+        if(from.equals(potentialCoPilot) || from.equals("+1" + potentialCoPilot)) {
+            System.out.println("This is what you want " + contents.substring(0,7));
+            if(contents.substring(0,7).equals("CPRQYS|")) {
 
-                    Toast accepted = Toast.makeText(this, "CoPilot accepted", Toast.LENGTH_SHORT);
-                    accepted.show();
+                Toast accepted = Toast.makeText(this, "CoPilot accepted", Toast.LENGTH_SHORT);
+                accepted.show();
 
-                    System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
-                    coPilot = potentialCoPilot;
-                    potentialCoPilot = "";
+                System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
+                coPilot = potentialCoPilot;
+                potentialCoPilot = "";
 
-                    Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    myIntent.putExtra("com.copilot.copilot", coPilot);
-                    startActivity(myIntent);
-                }
-                else if(contents.substring(0,7).equals("CPRQNO|")) {
-                    Toast accepted = Toast.makeText(this, "CoPilot denied", Toast.LENGTH_SHORT);
-                    accepted.show();
-
-                    System.out.println("He said.... NOo!" + potentialCoPilot + " " + coPilot + "!");
-                }
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                myIntent.putExtra("com.copilot.copilot", coPilot);
+                startActivity(myIntent);
             }
-        }
-        else{
-            System.out.println("Who dis is?" + coPilot + ": " + from);
+            else if(contents.substring(0,7).equals("CPRQNO|")) {
+                Toast accepted = Toast.makeText(this, "CoPilot denied", Toast.LENGTH_SHORT);
+                accepted.show();
+
+                System.out.println("He said.... NOo!" + potentialCoPilot + " " + coPilot + "!");
+            }
         }
     }
 

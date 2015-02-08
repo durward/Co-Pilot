@@ -34,7 +34,7 @@ public class MainActivity extends Activity implements IActivity {
     // For sending to co-pilots
     Button grpSendBtn;
     EditText grpMsg;
-    EditText grpNums;
+    TextView grpNums;
 
     IntentFilter intentFilter;
 
@@ -78,7 +78,8 @@ public class MainActivity extends Activity implements IActivity {
 
         grpSendBtn = (Button) findViewById(R.id.sendButtonBottom);
         grpMsg = (EditText) findViewById(R.id.messageBottom);
-        grpNums = (EditText) findViewById(R.id.numberBottom);
+        grpNums = (TextView) findViewById(R.id.numberBottom);
+        grpNums.setText(mPilot.coPilot);
 
         passengerSendBtn = (Button) findViewById(R.id.sendButtonTop);
         passengerMsg = (EditText) findViewById(R.id.messageTop);
@@ -90,7 +91,7 @@ public class MainActivity extends Activity implements IActivity {
             @Override
             public void onClick(View v) {
                 String myMsg = grpMsg.getText().toString();
-                String phoneNumber = grpNums.getText().toString();
+                String phoneNumber = mPilot.coPilot;//grpNums.getText().toString();
                 // Calls method that sends messages
                 sendGrpMsg(phoneNumber, myMsg);
                 grpMsg.setText("");
