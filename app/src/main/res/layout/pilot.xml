@@ -66,6 +66,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+            android:text="Send Request Text to Co-Pilot"
+>>>>>>> 6563a756ccb2042902af4e74abb7493415397ba8
             android:id="@+id/conversationBottom"
             android:background="#E08365"
             android:layout_below="@+id/numberBottom"

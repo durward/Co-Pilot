@@ -5,12 +5,12 @@ import android.telephony.SmsManager;
 public class CoPilot extends Pilot{
     String mainPilot = "";
 
-    IActivity activity;
+    CoPilotActivity activity;
 
     CoPilot(){
         super.manager = SmsManager.getDefault();}
 
-    CoPilot(IActivity mainAc){
+    CoPilot(CoPilotActivity mainAc){
         super.manager = SmsManager.getDefault();
         activity = mainAc;
     }
@@ -20,6 +20,11 @@ public class CoPilot extends Pilot{
     }
 
     public void OnRecv(String from, String contents){
+        if(mainPilot.equals("")){
+            if(contents.substring(0,7).equals("MPRQST|")) {
+                activity.handleRequest(from);
+            }
+        }
         if(mainPilot.equals(from)){
             int pipe  = contents.indexOf("|");
             int arrow = contents.indexOf("->");

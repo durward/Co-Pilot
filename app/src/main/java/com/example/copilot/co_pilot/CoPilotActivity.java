@@ -10,8 +10,10 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.view.View;
 import android.widget.Button;
+import android.app.AlertDialog;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.content.DialogInterface;
 
 import android.content.ContentResolver;
 import android.content.IntentFilter;
@@ -91,6 +93,34 @@ public class CoPilotActivity extends Activity implements IActivity {
         coPilot.SendToMainPilot(message);
     }
 
+    public void handleRequest(final String requester) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        // set title
+        alertDialogBuilder.setTitle("Accept Request?");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(requester + " needs a co-pilot!")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        coPilot.SetMainPilot(requester);
+                        coPilot.SendToNumber(requester, "CPRQYS|");
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        coPilot.SendToNumber(requester, "CPRQNO|");
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
 
     public void onReceiveSMS(SmsMessage msg) {
         System.out.println("MA: " + msg.getOriginatingAddress() + " " + msg.getMessageBody());
