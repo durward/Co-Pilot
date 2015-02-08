@@ -39,16 +39,19 @@ public class CoPilot extends Pilot{
                 String   toCode = contents.substring(4,6); //TODO: Watch these numbers?
 
                 if(fromCode.equals("MP") && toCode.equals("SP")){
-                    System.out.println("MP to SP: " + contents);
-                    activity.displayPassengerConversation(contents);
+                    String payload = contents.substring(7);
+                    System.out.println("MP to SP: " + payload);
+                    activity.displayPassengerConversation(payload);
                 }
                 else if(fromCode.equals("SP") && toCode.equals("MP")){
-                    System.out.println("SP to MP: " + contents);
-                    activity.displayPassengerConversation(contents);
+                    String payload = contents.substring(7);
+                    System.out.println("SP to MP: " + payload);
+                    activity.displayPassengerConversation(payload);
                 }
                 else if(fromCode.equals("MP") && toCode.equals("CP")){
-                    System.out.println("MP to CP: " + contents);
-                    activity.displayGrpConversation(contents);
+                    String payload = contents.substring(7);
+                    System.out.println("MP to CP: " + payload);
+                    activity.displayGrpConversation(payload);
                 }
             }
         }
