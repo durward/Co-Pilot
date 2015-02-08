@@ -38,7 +38,7 @@ public class MainPilot extends Pilot{
                 System.out.println("This is what you want " + contents.substring(0,7));
                 if(contents.substring(0,7).equals("CPRQYS|")) {
                     System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
-                    coPilot = potentialCoPilot;
+                    coPilot = "+1" + potentialCoPilot;
                     potentialCoPilot = "";
                 }
                 else if(contents.substring(0,7).equals("CPRQNO|")) {
