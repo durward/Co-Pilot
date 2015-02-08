@@ -78,9 +78,9 @@ public class MainActivity extends Activity{
             public void onClick(View v) {
                 String myMsg = grpMsg.getText().toString();
                 String phoneNumber = grpNums.getText().toString();
-
                 // Calls method that sends messages
                 sendGrpMsg(phoneNumber, myMsg);
+                grpMsg.setText("");
             }
         });
     }
@@ -103,11 +103,6 @@ public class MainActivity extends Activity{
         pilot.SendToCopilot(message);
     }
 
-//    private void sendMsg(String phoneNumber, String myMsg) {
-//        SmsManager sms = SmsManager.getDefault();
-//        sms.sendTextMessage(phoneNumber, null, myMsg, null, null);
-//    }
-
     public void onRecieveSMS(SmsMessage msg) {
         System.out.println("MA: " + msg.getOriginatingAddress() + " " + msg.getMessageBody());
         mPilot.OnRecv(msg.getOriginatingAddress(), msg.getMessageBody());
@@ -128,6 +123,5 @@ public class MainActivity extends Activity{
     @Override
     public void onDestroy(){
         super.onDestroy();
-        this.unregisterReceiver(smsListener);
     }
 }
