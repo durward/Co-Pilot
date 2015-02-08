@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Welcome to Co-Pilot!"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:textAlignment="center"
         android:textStyle="bold"
         android:layout_above="@+id/textView1"/>
@@ -32,34 +32,27 @@
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/textView1"
-        />
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:paddingTop="5px">
 
         <Button
             android:id="@+id/pilotLaunchBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
             android:text="Pilot"/>
 
         <Button
             android:id="@+id/coPilotLaunchBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="Co-Pilot"
             android:layout_toRightOf="@+id/pilotLaunchBtn"/>
-        </RelativeLayout>
+    </RelativeLayout>
 
 
 

@@ -8,7 +8,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#65C2E0"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/numberTop"
@@ -21,7 +20,6 @@
             android:layout_width="275dp"
             android:layout_gravity ="bottom"
             android:layout_height="wrap_content"
-            android:background="#65C2E0"
             android:id="@+id/messageTop"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
@@ -29,8 +27,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Text"
             android:id="@+id/conversationTop"
+            android:background="#65C2E0"
             android:layout_below="@+id/numberTop"
             android:layout_alignParentStart="true"
             android:layout_above="@+id/messageTop"
@@ -49,7 +47,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#E08365"
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/numberBottom"
@@ -62,7 +59,6 @@
             android:layout_width="275dp"
             android:layout_gravity ="bottom"
             android:layout_height="wrap_content"
-            android:background="#E08365"
             android:id="@+id/messageBottom"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true" />
@@ -70,8 +66,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
             android:text="Send Request Text to Co-Pilot"
+>>>>>>> 6563a756ccb2042902af4e74abb7493415397ba8
             android:id="@+id/conversationBottom"
+            android:background="#E08365"
             android:layout_below="@+id/numberBottom"
             android:layout_alignParentStart="true"
             android:layout_above="@+id/sendButtonBottom"
