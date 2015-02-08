@@ -86,6 +86,8 @@ public class CoPilotActivity extends Activity implements IActivity {
             }
         });
 
+        grpMsg.setText("");
+
     }
 
     private void sendGrpMsg(String number, String message) {
@@ -132,13 +134,15 @@ public class CoPilotActivity extends Activity implements IActivity {
     public void displayGrpConversation(String message) {
         // Show message in textview - may need to name these something
         TextView grpDisplay = (TextView) findViewById(R.id.conversationBottom);
-        grpDisplay.setText(message);
+        String prev = grpDisplay.getText().toString();
+        grpDisplay.setText(prev + "\n" + message);
     }
 
     public void displayPassengerConversation(String message) {
         // Show message in textview - may need to name these something
         TextView passengerDisplay = (TextView) findViewById(R.id.conversationTop);
-        passengerDisplay.setText(message);
+        String prev = passengerDisplay.getText().toString();
+        passengerDisplay.setText(prev + "\n" + message);
     }
 
     protected void onResume() {
