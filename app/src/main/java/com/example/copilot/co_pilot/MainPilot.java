@@ -51,10 +51,12 @@ public class MainPilot extends Pilot{
             SendToNumber(coPilot, "SP->MP|" + contents);
             System.out.println("SP->MP|" + contents);
             activity.displayPassengerLeftConversation(contents);
+            activity.displayPassengerRightConversation("\n");
         }
         else if(from.equals("+1" + coPilot) || from.equals(coPilot)){
             System.out.println(contents);
             activity.displayGrpLeftConversation(contents);
+            activity.displayGrpRightConversation("\n");
         }
         else{
             System.out.println("Who dis is?" + coPilot + ": " + from);
@@ -69,12 +71,14 @@ public class MainPilot extends Pilot{
     public void SendToCopilot(String contents){
         SendToNumber(coPilot, "MP->CP|" + contents);
         activity.displayGrpRightConversation(contents);
+        activity.displayGrpLeftConversation("\n");
     }
 
     public void SendToSecondParty(String contents){
         SendToNumber(secondParty, contents);
         SendToNumber(coPilot, "MP->SP|" + contents);
         activity.displayPassengerRightConversation(contents);
+        activity.displayPassengerLeftConversation("\n");
         System.out.println("Sent to SP and MP" + contents);
     }
 }
