@@ -11,6 +11,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <!-- MAIN PILOT -->
         <activity
             android:theme="@android:style/Theme.NoTitleBar"
             android:name=".MainActivity"
@@ -20,6 +21,14 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- CO PILOT -->
+        <activity
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:name=".CoPilotActivity"
+            android:label="@string/app_name" >
+            <!-- WE DELETED INTENT FILTER -->
         </activity>
     </application>
 <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
