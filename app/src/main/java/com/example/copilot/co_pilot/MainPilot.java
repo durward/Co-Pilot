@@ -1,6 +1,7 @@
 package com.example.copilot.co_pilot;
 
 import android.telephony.SmsManager;
+import android.widget.Toast;
 
 /**
  * Created by Benji Smith on 2/7/2015.
@@ -37,11 +38,18 @@ public class MainPilot extends Pilot{
             if(from.equals(potentialCoPilot) || from.equals("+1" + potentialCoPilot)) {
                 System.out.println("This is what you want " + contents.substring(0,7));
                 if(contents.substring(0,7).equals("CPRQYS|")) {
+
+                    Toast accepted = Toast.makeText(activity, "CoPilot accepted", Toast.LENGTH_SHORT);
+                    accepted.show();
+
                     System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
                     coPilot = potentialCoPilot;
                     potentialCoPilot = "";
                 }
                 else if(contents.substring(0,7).equals("CPRQNO|")) {
+                    Toast accepted = Toast.makeText(activity, "CoPilot denied", Toast.LENGTH_SHORT);
+                    accepted.show();
+
                     System.out.println("He said.... NOo!" + potentialCoPilot + " " + coPilot + "!");
                     potentialCoPilot = "";
                 }

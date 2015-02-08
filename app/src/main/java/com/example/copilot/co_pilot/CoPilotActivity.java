@@ -39,6 +39,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CoPilotActivity extends Activity implements IActivity {
     // For sending to group msg
@@ -88,6 +89,9 @@ public class CoPilotActivity extends Activity implements IActivity {
 
         grpMsg.setText("");
 
+
+        Toast pleaseWait = Toast.makeText(this, "Please wait to be invited.", Toast.LENGTH_LONG);
+        pleaseWait.show();
     }
 
     private void sendGrpMsg(String number, String message) {
