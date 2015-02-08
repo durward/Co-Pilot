@@ -5,24 +5,13 @@
     android:layout_height="fill_parent"
     android:layout_width="fill_parent">
     <RelativeLayout android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="fill_parent">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/numberTop"
-            android:layout_gravity="center_horizontal"
-            android:autoLink="phone"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/textView"
-            android:layout_below="@+id/numberTop">
+            android:layout_above="@+id/textView">
 
             <TextView
                 android:layout_width="match_parent"
@@ -73,16 +62,6 @@
 
     </RelativeLayout>
     <RelativeLayout android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="fill_parent">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:ems="10"
-            android:id="@+id/numberBottom"
-            android:layout_gravity="center_horizontal"
-            android:autoLink="phone"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
 
         <EditText
             android:layout_width="275dp"
@@ -96,7 +75,6 @@
             android:orientation="horizontal" android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="1"
-            android:layout_below="@+id/numberBottom"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/sendButtonBottom"
             android:layout_alignEnd="@+id/sendButtonBottom"

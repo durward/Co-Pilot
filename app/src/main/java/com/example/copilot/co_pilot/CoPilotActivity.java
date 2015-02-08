@@ -79,7 +79,7 @@ public class CoPilotActivity extends Activity implements IActivity {
             @Override
             public void onClick(View v) {
                 String myMsg = grpMsg.getText().toString();
-                String phoneNumber = grpNums.getText().toString();
+                String phoneNumber = coPilot.mainPilot;
                 // Calls method that sends messages
                 sendGrpMsg(phoneNumber, myMsg);
                 grpMsg.setText("");
