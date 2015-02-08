@@ -3,7 +3,7 @@ package com.example.copilot.co_pilot;
 import android.telephony.SmsManager;
 
 /**
- * Created by Benji Snith on 2/7/2015.
+ * Created by Benji Smith on 2/7/2015.
  */
 
 public class MainPilot extends Pilot{
