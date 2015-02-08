@@ -104,12 +104,15 @@ public class CoPilotActivity extends Activity implements IActivity {
                 .setCancelable(false)
                 .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
+                        System.out.println("I said yes");
                         coPilot.SetMainPilot(requester);
+                        System.out.println(coPilot.mainPilot);
                         coPilot.SendToNumber(requester, "CPRQYS|");
                     }
                 })
                 .setNegativeButton("No",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
+                        System.out.println("I said no");
                         coPilot.SendToNumber(requester, "CPRQNO|");
                         dialog.cancel();
                     }

@@ -35,10 +35,12 @@ public class MainPilot extends Pilot{
         if(coPilot.equals("")) {
             if(from.equals(potentialCoPilot)) {
                 if(contents.substring(0,7).equals("CPRQYS|")) {
+                    System.out.println("He said Yes!" + potentialCoPilot + " " + coPilot + "!");
                     coPilot = potentialCoPilot;
                     potentialCoPilot = "";
                 }
                 else if(contents.substring(0,7).equals("CPRQNO|")) {
+                    System.out.println("He said.... NOo!" + potentialCoPilot + " " + coPilot + "!");
                     potentialCoPilot = "";
                 }
             }

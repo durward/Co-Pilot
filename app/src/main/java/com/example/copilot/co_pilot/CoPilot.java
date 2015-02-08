@@ -22,6 +22,7 @@ public class CoPilot extends Pilot{
     public void OnRecv(String from, String contents){
         if(mainPilot.equals("")){
             if(contents.substring(0,7).equals("MPRQST|")) {
+                System.out.println("Somebody wants me");
                 activity.handleRequest(from);
             }
         }
