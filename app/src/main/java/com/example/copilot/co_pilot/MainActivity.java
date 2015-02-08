@@ -106,7 +106,7 @@ public class MainActivity extends Activity{
 
     private void sendPassengerMsg(String number, String message) {
         MainPilot pilot = (MainPilot) mPilot;
-        pilot.SendToSecondParty("+1" + number);
+        pilot.SetSecondParty("+1" + number);
         pilot.SendToSecondParty(message);
     }
 
