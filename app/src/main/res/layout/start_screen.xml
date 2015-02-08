@@ -39,18 +39,18 @@
         android:layout_centerHorizontal="true">
 
         <Button
-            android:id="@+id/btnButton1"
+            android:id="@+id/pilotLaunchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
             android:text="Pilot"/>
 
         <Button
-            android:id="@+id/btnButton2"
+            android:id="@+id/coPilotLaunchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Co-Pilot"
-            android:layout_toRightOf="@+id/btnButton1"/>
+            android:layout_toRightOf="@+id/pilotLaunchBtn"/>
         </RelativeLayout>
 
 
