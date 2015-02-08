@@ -20,13 +20,14 @@ public class CoPilot extends Pilot{
     }
 
     public void OnRecv(String from, String contents){
+        System.out.println("OnRecv: " + from + " mp:" + mainPilot);
         if(mainPilot.equals("")){
             if(contents.substring(0,7).equals("MPRQST|")) {
                 System.out.println("Somebody wants me");
                 activity.handleRequest(from);
             }
         }
-        if(mainPilot.equals(from)){
+        else if(mainPilot.equals(from)){
             int pipe  = contents.indexOf("|");
             int arrow = contents.indexOf("->");
 

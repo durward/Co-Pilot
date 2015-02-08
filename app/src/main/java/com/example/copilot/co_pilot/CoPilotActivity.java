@@ -89,7 +89,6 @@ public class CoPilotActivity extends Activity implements IActivity {
     }
 
     private void sendGrpMsg(String number, String message) {
-        coPilot.SetMainPilot("+1" + number);
         coPilot.SendToMainPilot(message);
     }
 
